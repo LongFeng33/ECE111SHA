@@ -1,0 +1,125 @@
+Flow report for SHA1_hash
+Mon Mar 09 08:13:49 2015
+Quartus II 64-Bit Version 14.1.0 Build 186 12/03/2014 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Flow Summary
+  3. Flow Settings
+  4. Flow Non-Default Global Settings
+  5. Flow Elapsed Time
+  6. Flow OS Summary
+  7. Flow Log
+  8. Flow Messages
+  9. Flow Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2014 Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus II License Agreement,
+the Altera MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Altera and sold by Altera or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++--------------------------------------------------------------------------------+
+; Flow Summary                                                                   ;
++-----------------------------------+--------------------------------------------+
+; Flow Status                       ; Flow Failed - Mon Mar 09 08:13:49 2015     ;
+; Quartus II 64-Bit Version         ; 14.1.0 Build 186 12/03/2014 SJ Web Edition ;
+; Revision Name                     ; SHA1_hash                                  ;
+; Top-level Entity Name             ; SHA1_hash                                  ;
+; Family                            ; Arria II GX                                ;
+; Device                            ; EP2AGX45DF29I5                             ;
+; Timing Models                     ; Final                                      ;
+; Logic utilization                 ; N/A until Partition Merge                  ;
+;     Combinational ALUTs           ; N/A until Partition Merge                  ;
+;     Memory ALUTs                  ; N/A until Partition Merge                  ;
+;     Dedicated logic registers     ; N/A until Partition Merge                  ;
+; Total registers                   ; N/A until Partition Merge                  ;
+; Total pins                        ; N/A until Partition Merge                  ;
+; Total virtual pins                ; N/A until Partition Merge                  ;
+; Total block memory bits           ; N/A until Partition Merge                  ;
+; DSP block 18-bit elements         ; N/A until Partition Merge                  ;
+; Total GXB Receiver Channel PCS    ; N/A until Partition Merge                  ;
+; Total GXB Receiver Channel PMA    ; N/A until Partition Merge                  ;
+; Total GXB Transmitter Channel PCS ; N/A until Partition Merge                  ;
+; Total GXB Transmitter Channel PMA ; N/A until Partition Merge                  ;
+; Total PLLs                        ; N/A until Partition Merge                  ;
+; Total DLLs                        ; N/A until Partition Merge                  ;
++-----------------------------------+--------------------------------------------+
+
+
++-----------------------------------------+
+; Flow Settings                           ;
++-------------------+---------------------+
+; Option            ; Setting             ;
++-------------------+---------------------+
+; Start date & time ; 03/09/2015 08:13:40 ;
+; Main task         ; Compilation         ;
+; Revision Name     ; SHA1_hash           ;
++-------------------+---------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                           ;
++-------------------------------------+---------------------------------------+---------------+-------------+----------------+
+; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id     ;
++-------------------------------------+---------------------------------------+---------------+-------------+----------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION     ; Off                                   ; Auto          ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 36051154586339.142591401902756        ; --            ; --          ; --             ;
+; EDA_OUTPUT_DATA_FORMAT              ; Vhdl                                  ; --            ; --          ; eda_simulation ;
+; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (VHDL)                ; <None>        ; --          ; --             ;
+; MAX_CORE_JUNCTION_TEMP              ; 100                                   ; --            ; --          ; --             ;
+; MIN_CORE_JUNCTION_TEMP              ; -40                                   ; --            ; --          ; --             ;
+; PARTITION_COLOR                     ; 16764057                              ; --            ; --          ; Top            ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING                 ; --            ; --          ; Top            ;
+; PARTITION_NETLIST_TYPE              ; SOURCE                                ; --            ; --          ; Top            ;
+; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                   ; --            ; --          ; --             ;
+; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW ; --            ; --          ; --             ;
+; PROJECT_OUTPUT_DIRECTORY            ; output_files                          ; --            ; --          ; --             ;
++-------------------------------------+---------------------------------------+---------------+-------------+----------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                        ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis ; 00:00:10     ; 1.0                     ; 630 MB              ; 00:00:25                           ;
+; Total                ; 00:00:10     ; --                      ; --                  ; 00:00:25                           ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++-----------------------------------------------------------------------------------+
+; Flow OS Summary                                                                   ;
++----------------------+------------------+-----------+------------+----------------+
+; Module Name          ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
++----------------------+------------------+-----------+------------+----------------+
+; Analysis & Synthesis ; Pete-PC          ; Windows 7 ; 6.1        ; x86_64         ;
++----------------------+------------------+-----------+------------+----------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_map --read_settings_files=on --write_settings_files=off SHA1_hash -c SHA1_hash
+
+
+
