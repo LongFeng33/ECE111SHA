@@ -27,7 +27,7 @@ integer         j;
 integer         outloop;
 integer         cycles;
 
-integer         message_length = 120; // in bytes // change this number to test your design
+integer         message_length = 511; // in bytes // change this number to test your design
 integer         pad_length;
 
 wire            port_A_clk;
@@ -137,7 +137,6 @@ begin
     2: dpsram_test[message_length/4] = dpsram_test[message_length/4] & 32'h FFFF0000 | 32'h 00008000;
     3: dpsram_test[message_length/4] = dpsram_test[message_length/4] & 32'h FFFFFF00 | 32'h 00000080;
     endcase
-
     for (k = message_length/4+1; k < pad_length/4; k = k + 1) begin
         dpsram_test[k] = 32'h00000000;
     end
@@ -192,6 +191,7 @@ begin
         h2_tb = h2_tb + c_tb;
         h3_tb = h3_tb + d_tb;
         h4_tb = h4_tb + e_tb;
+$display("%h%h%h%h%h\n",h0_tb,h1_tb,h2_tb,h3_tb,h4_tb);
     end
 
     digest_tb = { h0_tb, h1_tb, h2_tb, h3_tb, h4_tb };
@@ -249,7 +249,6 @@ begin
             port_A_data_out = dpsram[port_A_addr >> 2];
     end else
         $display("Error: memory reference not word aligned!\n");
-	//$display("address: %d\n", port_A_addr);
 end
 
 always @(posedge clk) // track # of cycles

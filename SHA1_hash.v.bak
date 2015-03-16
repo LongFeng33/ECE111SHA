@@ -188,6 +188,7 @@ always @(posedge clk or negedge nreset)begin
 			        	h2 = h2 + c;
 			        	h3 = h3 + d;
 			        	h4 = h4 + e;
+$display("mine: %h%h%h%h%h\n",h0,h1,h2,h3,h4);
 					a = h0;
 					b = h1;
 					c = h2;

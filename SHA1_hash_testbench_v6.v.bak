@@ -249,7 +249,7 @@ begin
             port_A_data_out = dpsram[port_A_addr >> 2];
     end else
         $display("Error: memory reference not word aligned!\n");
-	//$display("address: %d\n", port_A_addr);
+	$display("address: %d\n", port_A_addr);
 end
 
 always @(posedge clk) // track # of cycles
