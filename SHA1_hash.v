@@ -57,7 +57,6 @@ parameter IDLE = 0;
 parameter READ = 1;
 parameter COMPUTE = 2;
 parameter COMPUTE2 = 3;
-parameter COMPUTE3 = 6; 
 parameter PRE = 4;
 parameter POST = 5;
 
@@ -72,6 +71,21 @@ function [31:0] changeEndian;
 endfunction
 
 
+
+function [31:0] calculate;
+  input [31:0]a, f, e, k;
+  begin
+     calculate = {a[26:0],a[31:27]} + f + e + k ;
+   end
+  endfunction
+
+function [31:0] rotate;
+	input [31:0] x;
+	input [5:0] y;
+	rotate = (x<<y) | (x>>(32-y));
+	endfunction
+  
+  
 always @(posedge clk or negedge nreset)begin
 	if(!nreset)begin
 		state <= IDLE; 
@@ -108,6 +122,7 @@ always @(posedge clk or negedge nreset)begin
 				f <= (b & c) | ((b ^ 32'hFFFFFFFF) & d);
 				if(reading) state <= READ;
 				else state <= COMPUTE;
+				
 
 			end
 			READ: begin
@@ -115,7 +130,7 @@ always @(posedge clk or negedge nreset)begin
 				read_addr <= read_addr+4;
 			end
 			COMPUTE: begin
-				//w stage
+				
 				if(n < 16) begin
 					if(reading) begin
 						if(len == 0) begin
@@ -135,7 +150,7 @@ always @(posedge clk or negedge nreset)begin
 					end
 					else begin
 						if(len == 1) begin
-							w[n] <= message_size >> 29;
+							w[n] <= message_size>> 29;
 						end
 						else if(len == 0) begin
 							
@@ -148,8 +163,9 @@ always @(posedge clk or negedge nreset)begin
 					len <= len - 1;
 				end
 				else begin
-					w[n%16] = (w[(n-3)%16] ^ w[(n-8)%16] ^ w[(n-14)%16] ^ w[(n-16)%16]);
-           				w[n%16] <= (w[n%16] << 1) | (w[n%16] >> 31);
+					//w[n%16] = (w[(n-3)%16] ^ w[(n-8)%16] ^ w[(n-14)%16] ^ w[(n-16)%16]);
+					//w[n%16] = calw(n);
+           				w[n%16] <= rotate((w[(n-3)%16] ^ w[(n-8)%16] ^ w[(n-14)%16] ^ w[(n-16)%16]),1);//(w[n%16] << 1) | (w[n%16] >> 31);
  				end
 				
 				//f stage
@@ -161,7 +177,7 @@ always @(posedge clk or negedge nreset)begin
                 			k <= 32'h6ED9EBA1;
             			end else if (n<=59) begin
                 			f <= (a & {b[1:0],b[31:2]}) | (a & c) | ({b[1:0],b[31:2]} & c);
-               				k <= 32'h8F1BBCDC;
+               			k <= 32'h8F1BBCDC;
             			end else begin
                 			f <= a ^ {b[1:0],b[31:2]} ^ c;
                 			k <= 32'hCA62C1D6;
@@ -177,11 +193,11 @@ always @(posedge clk or negedge nreset)begin
 					f <= (b & c) | ((b ^ 32'hFFFFFFFF) & d);
 				end
 				else begin	
-					a <= ((a << 5)|(a >> 27)) + f + e + k + w[(n+15)%16];
-$display("w[%d] = %h\n",n-1, w[(n+15)%16]);
-            				e <= d;
+					a <= calculate(a,f,e,k)+ w[(n+15)%16];
+
+            	e <= d;
 					d <= c;
-            				c <= ((b << 30)|(b >> 2));
+            				c <= rotate(b,30);//((b << 30)|(b >> 2));
             				b <= a;
 				end
 
@@ -193,16 +209,16 @@ $display("w[%d] = %h\n",n-1, w[(n+15)%16]);
 				if(n == 79) begin
 					n <= 0;
 					block <= block + 1;
-					state <= COMPUTE3;
+					state <= COMPUTE2;
 				end
 				else n <= n + 1;
 			end
-			COMPUTE3: begin
-				a <= ((a << 5)|(a >> 27)) + f + e + k + w[(n+15)%16];
-            			e <= d;
+			COMPUTE2: begin
+				a <= calculate(a,f,e,k) + w[(n+15)%16];
+            e <= d;
 				d <= c;
-            			c <= ((b << 30)|(b >> 2));
-            			b <= a;
+            c <= rotate(b,30);//((b << 30)|(b >> 2));
+            b <= a;
 				state <= POST;
 			end
 			POST: begin
